@@ -27,7 +27,7 @@ foal.task('clean_some', function(cleanPath) {
 });
 
 gulp.task('default', function(cb) {
-  //use "foal.run(...)" to run your foal-task with params.
+  //use "foal.run(...)" to run your foal-task with param.
   //使用 foal.run(...) 来执行带参数（当然也可以不带）的 foal 任务
   foal.run(clean_some('test_path'), cb);
 });
@@ -53,9 +53,9 @@ foal.run(task1('param'), [task2('param'), task3()], task4('param'), cb);
 ```javascript
 foal.task('test', {
   bindToFoal: true
-}, function(params) {/*...*/});
+}, function(param) {/*...*/});
 
-foal.run(foal.test(params));
+foal.run(foal.test(param));
 ```
 
 # Task Combination 合并的任务

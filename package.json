@@ -3,7 +3,7 @@
     "email": "fanluan058@gmail.com",
     "name": "CJY"
   },
-  "description": "Allow you to run task with params (in gulpfile) when gulp's running NOT at beginning.",
+  "description": "Allow you to run task with param (NOT from cmd) when gulp's running.",
   "keywords": [
     "foal",
     "params",
@@ -23,5 +23,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.0.6"
+  "version": "1.0.7"
 }
