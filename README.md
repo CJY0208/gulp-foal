@@ -65,6 +65,18 @@ Combine your foal-task and run them like this:
 如下所示，合并执行你的任务：
 
 ```javascript
+gulp.task('default', ['all_page']);
+
+gulp.task('all_page', () => {
+  return gulp.src(`${PATH.DEVELOP}/page/*/`)
+    .pipe(through.obj(function(file, enc, cb) {
+      this.push(file);
+      const pageName = file.relative;
+      const pagePath = `${PATH.DEVELOP}/page/${pageName}`;
+      foal.run(page(pageName, pagePath), cb);
+    }));
+});
+
 foal.task('page', (pageName, pagePath) => {
   return foal.run([js(pageName, pagePath), css(pageName, pagePath)]);
 });
@@ -92,17 +104,6 @@ foal.task('css', (pageName, pagePath) => {
     .pipe(gulp.dest(`${pagePath}/.build`));
 });
 
-gulp.task('all_page', () => {
-  return gulp.src(`${PATH.DEVELOP}/page/*/`)
-    .pipe(through.obj(function(file, enc, cb) {
-      this.push(file);
-      const pageName = file.relative;
-      const pagePath = `${PATH.DEVELOP}/page/${pageName}`;
-      foal.run([js(pageName, pagePath), css(pageName, pagePath)], cb);
-    }));
-});
-
-gulp.task('default', ['all_page']);
 ```
 
 # The MIT License (MIT)
