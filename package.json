@@ -1,27 +1,24 @@
 {
+  "name": "gulp-foal",
+  "version": "1.1.0",
+  "description": "Allow you to run task with param (NOT from cmd) when gulp's running.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CJY0208/gulp-foal.git"
+  },
   "author": {
     "email": "fanluan058@gmail.com",
     "name": "CJY"
   },
-  "description": "Allow you to run task with param (NOT from cmd) when gulp's running.",
-  "keywords": [
-    "foal",
-    "params",
-    "param",
-    "gulpplugin"
-  ],
   "license": "MIT",
-  "main": "index.js",
-  "maintainers": [
-    {
-      "email": "fanluan058@gmail.com",
-      "name": "cjy0208"
-    }
-  ],
-  "name": "gulp-foal",
-  "optionalDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bugs": {
+    "url": "https://github.com/CJY0208/gulp-foal/issues"
   },
-  "version": "1.1.1"
+  "version": "1.1.1",
+  "homepage": "https://github.com/CJY0208/gulp-foal#readme"
 }
+
