@@ -1,6 +1,5 @@
 {
   "name": "gulp-foal",
-  "version": "1.1.0",
   "description": "Allow you to run task with param (NOT from cmd) when gulp's running.",
   "main": "index.js",
   "scripts": {
@@ -18,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/CJY0208/gulp-foal/issues"
   },
-  "version": "1.1.1",
+  "version": "1.1.2",
   "homepage": "https://github.com/CJY0208/gulp-foal#readme"
 }
 

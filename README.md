@@ -16,7 +16,7 @@ Use gulp-foal like this:
 
 var gulp = require('gulp');
 var clean = require('gulp-clean');
-var foal = require('gulp-foal');
+var foal = require('gulp-foal')();
 
 //use "foal.task(...)" to define a foal-task.
 //使用 foal.task(...) 来定义一个 foal 任务
@@ -29,8 +29,10 @@ foal.task('clean_some', function(cleanPath) {
 
 gulp.task('default', function(cb) {
   //use "foal.run(...)" to run your foal-task with param.
-  //使用 foal.run(...) 来执行带参数（当然也可以不带）的 foal 任务
-  foal.run(clean_some('test_path'), cb);
+  //使用 foal.run(...) 来执行带参数的 foal 任务
+  foal.run(foal.clean_some('test_path'), cb);
+  //put 'cb' to the end of foal-run-task-list when using foal-run in gulp-task for running gulp-task orderly.
+  //当在gulp-task中使用foal.run时，请务必将 cb 放在foal.run函数列表的末尾，以保证gulp任务顺序执行
 });
 
 ```
@@ -47,16 +49,31 @@ foal.run(task1('param'), [task2('param'), task3()], task4('param'), cb);
 
 ## foal.task()
 
-**Foal-task is bind to global by default.** If you don't want it to, use like this:
+**Foal-task is bind to object 'foal' by default.** If you don't want it to, use like this:
 
-**foal 任务默认被绑定在全局环境下，** 如果你不希望这样，如下
+**foal 任务默认被绑定在foal对象下，** 如果你不希望这样，如下
 
 ```javascript
-foal.task('test', {
-  bindToFoal: true
-}, function(param) {/*...*/});
+var my_foal_tasks = {};
+var foal = require('gulp-foal')(my_foal_tasks);
 
-foal.run(foal.test(param));
+foal.task('test', function(param) {/*...*/});
+
+foal.run(my_foal_tasks.test(param));
+```
+
+Or like this:
+或者这样
+
+```javascript
+
+var foal = require('gulp-foal')();
+var my_foal_tasks = {};
+foal.bindTo(my_foal_tasks);
+
+foal.task('test', function(param) {/*...*/});
+
+foal.run(my_foal_tasks.test(param));
 ```
 
 # Task Combination 合并的任务
@@ -66,6 +83,9 @@ Combine your foal-task and run them like this:
 如下所示，合并执行你的任务：
 
 ```javascript
+
+var foal = require('gulp-foal')(global);
+
 gulp.task('default', ['all_page']);
 
 gulp.task('all_page', () => {
@@ -109,9 +129,3 @@ foal.task('css', (pageName, pagePath) => {
 
 # The MIT License (MIT)
 Copyright (c) 2016 CJY fanluan058@gmail.com
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
